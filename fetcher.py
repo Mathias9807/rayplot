@@ -6,12 +6,13 @@ import yfinance
 
 # Dataframe: stores the trading data of one day. Stores day open price and each 1min close for the whole trading day
 class Dataframe:
-	def __init__(self, ticker: str, date: str, openPr: float, ticks: [float]):
+	def __init__(self, ticker: str, date: str, historyData):
 		self.ticker = ticker
 		self.date = date
-		self.openPr = openPr
-		self.ticks = ticks
-		self.openTime = len(ticks) / 60
+		self.openPr = list(historyData['Open'])[0]
+		self.ticks = list(historyData['Close'])
+		self.openTime = len(self.ticks) / 60
+		self.openHour = historyData.index[0].hour + historyData.index[0].minute / 60
 
 	def __str__(self):
 		return '{} [{}]: open {}, ticks {}'.format(self.ticker, self.date, self.openPr, self.ticks)
@@ -50,7 +51,7 @@ def getDay(ticker: str, date: str):
 	data = stock.history(interval='1m', start=date, end=dayAfter)
 
 	if len(data['Open']) > 0:
-		df = Dataframe(ticker, date, list(data['Open'])[0], list(data['Close']))
+		df = Dataframe(ticker, date, data)
 
 		# Save to cache if it's data for a previous day
 		if day < datetime.date.today():

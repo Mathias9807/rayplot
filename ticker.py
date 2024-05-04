@@ -7,8 +7,8 @@ class Ticker(Component):
 		super().__init__()
 		self.ticker = ticker
 
-		df = getDay(ticker, datetime.date.today().strftime('%Y-%m-%d'))
-		# df = getDay(ticker, '2024-05-02')
+		# df = getDay(ticker, datetime.date.today().strftime('%Y-%m-%d'))
+		df = getDay(ticker, '2024-05-02')
 		if df is None:
 			return
 
