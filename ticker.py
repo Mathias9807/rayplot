@@ -21,7 +21,7 @@ class Ticker(Component):
 		hbox.children.append(Label(df.date))
 		vbox.children.append(hbox)
 
-		vbox.children.append(Graph(df))
+		vbox.children.append(Graph(ticker))
 		self.children.append(vbox)
 
 	def min_width(self):
@@ -37,5 +37,6 @@ class Ticker(Component):
 		return self.children[0].max_height() if len(self.children) > 0 else 0
 
 	def render(self, x, y, w, h):
+		super().render(x, y, w, h)
 		if len(self.children) > 0:
 			self.children[0].render(x, y, w, h)

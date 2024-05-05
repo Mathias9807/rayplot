@@ -4,6 +4,7 @@ import pyray as rl
 
 class Label(Component):
 	def __init__(self, text: str, color=main.colors.text):
+		super().__init__()
 		self.text = text
 		self.color = color
 		self.padding = 20
@@ -23,6 +24,7 @@ class Label(Component):
 		return self.min_height()
 
 	def render(self, x, y, w, h):
+		super().render(x, y, w, h)
 		textSize = Vector(self.min_width(), self.min_height())
 		tl = Vector(x, y)
 		size = Vector(w, h)

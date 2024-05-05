@@ -10,6 +10,7 @@ class Layout(Enum):
 
 class HBox(Component):
 	def __init__(self, layout = Layout.Centered):
+		super().__init__()
 		self.layout = layout
 		self.children = []
 
@@ -26,6 +27,7 @@ class HBox(Component):
 		return max([c.max_height() for c in self.children])
 
 	def render(self, x, y, w, h):
+		super().render(x, y, w, h)
 		rl.draw_rectangle_lines(int(x), int(y), int(w), int(h), main.colors.containers)
 
 		height = min(max([c.max_height() for c in self.children]), h)
@@ -59,6 +61,7 @@ class HBox(Component):
 
 class VBox(Component):
 	def __init__(self, layout=Layout.Centered):
+		super().__init__()
 		self.layout = layout
 		self.children = []
 
@@ -79,6 +82,7 @@ class VBox(Component):
 		return sum([c.max_height() for c in self.children])
 
 	def render(self, x, y, w, h):
+		super().render(x, y, w, h)
 		rl.draw_rectangle_lines(int(x), int(y), int(w), int(h), main.colors.containers)
 
 		if len(self.children) == 0:
